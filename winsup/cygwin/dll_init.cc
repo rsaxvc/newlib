@@ -336,8 +336,11 @@ dll_list::alloc (HINSTANCE h, per_process *p, dll_type type)
     }
   else
     {
+      size_t forkntsize = forkable_ntnamesize (type, ntname, modname);
+
       /* FIXME: Change this to new at some point. */
-      d = (dll *) cmalloc (HEAP_2_DLL, sizeof (*d) + (ntnamelen * sizeof (*ntname)));
+      d = (dll *) cmalloc (HEAP_2_DLL, sizeof (*d)
+			   + ((ntnamelen + forkntsize) * sizeof (*ntname)));
 
       /* Now we've allocated a block of information.  Fill it in with the
 	 supplied info about this DLL. */
@@ -353,6 +356,15 @@ dll_list::alloc (HINSTANCE h, per_process *p, dll_type type)
       d->image_size = ((pefile*)h)->optional_hdr ()->SizeOfImage;
       d->preferred_base = (void*) ((pefile*)h)->optional_hdr()->ImageBase;
       d->type = type;
+      d->fbi.FileAttributes = INVALID_FILE_ATTRIBUTES;
+      d->fii.IndexNumber.QuadPart = -1LL;
+      if (!forkntsize)
+	d->forkable_ntname = NULL;
+      else
+	{
+	  d->forkable_ntname = d->ntname + ntnamelen + 1;
+	  *d->forkable_ntname = L'\0';
+	}
       append (d);
       if (type == DLL_LOAD)
 	loaded_dlls++;
@@ -664,6 +676,8 @@ dll_list::reserve_space ()
 void
 dll_list::load_after_fork (HANDLE parent)
 {
+  release_forkables ();
+
   // moved to frok::child for performance reasons:
   // dll_list::reserve_space();
 
