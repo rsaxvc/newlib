@@ -32,7 +32,7 @@ public:
 /* Data accessible to all tasks */
 
 
-#define CURR_SHARED_MAGIC 0x72c39e6fU
+#define CURR_SHARED_MAGIC 0xed846fc3U
 
 #define USER_VERSION   1
 
@@ -48,7 +48,7 @@ class shared_info
   LONG last_used_bindresvport;
   DWORD obcaseinsensitive;
   mtinfo mt;
-  char forkable_hardlink_support; /* single byte access always is atomic */
+  LONG forkable_hardlink_support;
 
   void initialize ();
   void init_obcaseinsensitive ();
