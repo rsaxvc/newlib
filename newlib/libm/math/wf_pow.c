@@ -125,12 +125,12 @@
 		    exc.arg2 = (double)y;
 		    if (_LIB_VERSION == _SVID_) {
 		       exc.retval = HUGE;
-		       y *= 0.5;
-		       if(x<0.0&&rint(y)!=y) exc.retval = -HUGE;
+		       y *= 0.5f;
+		       if(x<0.0f&&rintf(y)!=y) exc.retval = -HUGE;
 		    } else {
 		       exc.retval = HUGE_VAL;
-                       y *= 0.5;
-		       if(x<0.0&&rint(y)!=y) exc.retval = -HUGE_VAL;
+                       y *= 0.5f;
+		       if(x<0.0f&&rintf(y)!=y) exc.retval = -HUGE_VAL;
 		    }
 		    if (_LIB_VERSION == _POSIX_)
 		        errno = ERANGE;
