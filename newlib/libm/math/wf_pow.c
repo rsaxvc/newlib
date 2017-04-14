@@ -123,15 +123,13 @@
 		    exc.err = 0;
 		    exc.arg1 = (double)x;
 		    exc.arg2 = (double)y;
+		    y *= 0.5f;
 		    if (_LIB_VERSION == _SVID_) {
 		       exc.retval = HUGE;
-		       y *= 0.5f;
-		       if(x<0.0f&&rintf(y)!=y) exc.retval = -HUGE;
 		    } else {
 		       exc.retval = HUGE_VAL;
-                       y *= 0.5f;
-		       if(x<0.0f&&rintf(y)!=y) exc.retval = -HUGE_VAL;
 		    }
+		    if(x<(float)0.0&&rintf(y)!=y) exc.retval = -exc.retval;
 		    if (_LIB_VERSION == _POSIX_)
 		        errno = ERANGE;
 		    else if (!matherr(&exc)) {

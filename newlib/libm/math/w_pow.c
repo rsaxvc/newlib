@@ -173,15 +173,13 @@ PORTABILITY
 		    exc.err = 0;
 		    exc.arg1 = x;
 		    exc.arg2 = y;
+		    y *= 0.5;
 		    if (_LIB_VERSION == _SVID_) {
 		       exc.retval = HUGE;
-		       y *= 0.5;
-		       if(x<0.0&&rint(y)!=y) exc.retval = -HUGE;
 		    } else {
 		       exc.retval = HUGE_VAL;
-                       y *= 0.5;
-		       if(x<0.0&&rint(y)!=y) exc.retval = -HUGE_VAL;
 		    }
+		    if(x<0.0&&rint(y)!=y) exc.retval = -exc.retval;
 		    if (_LIB_VERSION == _POSIX_)
 		        errno = ERANGE;
 		    else if (!matherr(&exc)) {

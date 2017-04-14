@@ -100,31 +100,22 @@ QUICKREF
 	if(_LIB_VERSION == _IEEE_ || isnan(x)) return z;
 	y = fabs(x);
 	if(y>=1.0) {
+            exc.name = "atanh";
+	    exc.err = 0;
+	    exc.arg1 = exc.arg2 = x;
 	    if(y>1.0) {
                 /* atanh(|x|>1) */
                 exc.type = DOMAIN;
-                exc.name = "atanh";
-		exc.err = 0;
-		exc.arg1 = exc.arg2 = x;
                 exc.retval = 0.0/0.0;
-                if (_LIB_VERSION == _POSIX_)
-                  errno = EDOM;
-                else if (!matherr(&exc)) {
-                  errno = EDOM;
-                }
-	    } else { 
+	    } else {
                 /* atanh(|x|=1) */
                 exc.type = SING;
-                exc.name = "atanh";
-		exc.err = 0;
-		exc.arg1 = exc.arg2 = x;
 		exc.retval = x/0.0;	/* sign(x)*inf */
-                if (_LIB_VERSION == _POSIX_)
-                  errno = EDOM;
-                else if (!matherr(&exc)) {
-                  errno = EDOM;
-                }
             }
+            if (_LIB_VERSION == _POSIX_)
+              errno = EDOM;
+            else if (!matherr(&exc))
+              errno = EDOM;
 	    if (exc.err != 0)
               errno = exc.err;
             return exc.retval; 

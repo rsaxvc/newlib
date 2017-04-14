@@ -35,34 +35,25 @@
 	if(_LIB_VERSION == _IEEE_ || isnan(x)) return z;
 	y = fabsf(x);
 	if(y>=(float)1.0) {
+            exc.name = "atanhf";
+	    exc.err = 0;
+	    exc.arg1 = exc.arg2 = (double)x;
 	    if(y>(float)1.0) {
                 /* atanhf(|x|>1) */
                 exc.type = DOMAIN;
-                exc.name = "atanhf";
-		exc.err = 0;
-		exc.arg1 = exc.arg2 = (double)x;
                 exc.retval = 0.0/0.0;
-                if (_LIB_VERSION == _POSIX_)
-                  errno = EDOM;
-                else if (!matherr(&exc)) {
-                  errno = EDOM;
-                }
-	    } else { 
+	    } else {
                 /* atanhf(|x|=1) */
                 exc.type = SING;
-                exc.name = "atanhf";
-		exc.err = 0;
-		exc.arg1 = exc.arg2 = (double)x;
-		exc.retval = x/0.0;	/* sign(x)*inf */
-                if (_LIB_VERSION == _POSIX_)
-                  errno = EDOM;
-                else if (!matherr(&exc)) {
-                  errno = EDOM;
-                }
+		exc.retval = (double)(x/0.0f);	/* sign(x)*inf */
             }
+            if (_LIB_VERSION == _POSIX_)
+              errno = EDOM;
+            else if (!matherr(&exc))
+              errno = EDOM;
 	    if (exc.err != 0)
               errno = exc.err;
-            return (float)exc.retval; 
+            return (float)exc.retval;
 	} else
 	    return z;
 #endif
