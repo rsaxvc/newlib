@@ -38,6 +38,7 @@ extern float   z_rooteps_f;
 
 /* Core math routines. */
 
+int    _EXFUN (isposf, (float));
 int    _EXFUN (numtest, (double));
 int    _EXFUN (numtestf, (float));
 double _EXFUN (logarithm, (double, int));
