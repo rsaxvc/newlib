@@ -30,6 +30,7 @@ static const float p[] = { -0.713793159e+1,
 static const float LNV = 0.6931610107;
 static const float INV_V2 = 0.2499930850;
 static const float V_OVER2_MINUS1 = 0.1383027787e-4;
+static const float WBAR = 18.55;
 
 float
 _DEFUN (sinehf, (float, int),
@@ -38,7 +39,6 @@ _DEFUN (sinehf, (float, int),
 {
   float y, f, P, Q, R, res, z, w;
   int sgn = 1;
-  float WBAR = 18.55;
 
   /* Check for special values. */
   switch (numtestf (x))
@@ -58,12 +58,12 @@ _DEFUN (sinehf, (float, int),
 
   if ((y > 1.0 && !cosineh) || cosineh)
     {
-      if (y > BIGX)
+      if (y > BIGX_F)
         {
           w = y - LNV;
-          
+
           /* Check for w > maximum here. */
-          if (w > BIGX)
+          if (w > BIGX_F)
             {
               errno = ERANGE;
               return (x);
