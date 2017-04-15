@@ -73,7 +73,7 @@ _DEFUN (expf, (float),
     N = (int) (x * INV_LN2 + (float)0.5);
 
   /* Construct the mantissa. */
-  g = x - N * LN2;
+  g = x - (float)N * LN2;
   z = g * g;
   P = g * (p1 * z + p0);
   Q = q1 * z + q0;

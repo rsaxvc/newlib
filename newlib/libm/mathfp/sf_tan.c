@@ -32,7 +32,7 @@ float
 _DEFUN (tanf, (float),
         float x)
 {
-  float y, f, g, XN, xnum, xden, res;
+  float y, f, g, xnum, xden, res;
   int N;
 
   /* Check for special values. */
@@ -49,35 +49,33 @@ _DEFUN (tanf, (float),
   y = fabsf (x);
 
   /* Check for values that are out of our range. */
-  if (y > 105414357.0)
+  if (y > 105414357.0f)
     {
       errno = ERANGE;
       return (y);
     }
 
-  if (x < 0.0)
-    N = (int) (x * TWO_OVER_PI - 0.5);
+  if (x < 0.0f)
+    N = (int) (x * TWO_OVER_PI - 0.5f);
   else
-    N = (int) (x * TWO_OVER_PI + 0.5);
+    N = (int) (x * TWO_OVER_PI + 0.5f);
 
-  XN = (float) N;
-
-  f = x - N * __PI_OVER_TWO;
+  f = x - (float)N * (float)__PI_OVER_TWO;
 
   /* Check for values that are too small. */
   if (-z_rooteps_f < f && f < z_rooteps_f)
     {
       xnum = f;
-      xden = 1.0;
+      xden = 1.0f;
     }
 
-  /* Calculate the polynomial. */ 
+  /* Calculate the polynomial. */
   else
-    { 
+    {
       g = f * f;
 
       xnum = f * (p[0] * g) + f;
-      xden = (q[1] * g + q[0]) * g + 1.0;
+      xden = (q[1] * g + q[0]) * g + 1.0f;
     }
 
   /* Check for odd or even values. */
@@ -85,7 +83,7 @@ _DEFUN (tanf, (float),
     {
       xnum = -xnum;
       res = xden / xnum;
-    } 
+    }
   else
     {
       res = xnum / xden;

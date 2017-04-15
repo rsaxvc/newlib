@@ -55,12 +55,12 @@ _DEFUN (sqrtf, (float),
             errno = ERANGE;
             return (z_infinity_f.f);
           }
-    } 
+    }
 
   /* Initial checks are performed here. */
-  if (x == 0.0)
-    return (0.0);
-  if (x < 0)
+  if (x == 0.0f)
+    return (0.0f);
+  if (x < 0.0f)
     {
       errno = EDOM;
       return (z_notanum_f.f);
@@ -71,17 +71,17 @@ _DEFUN (sqrtf, (float),
   odd = exp & 1;
 
   /* Get the initial approximation. */
-  y = 0.41731 + 0.59016 * f;
+  y = 0.41731f + 0.59016f * f;
 
-  f *= 0.5;
+  f *= 0.5f;
   /* Calculate the remaining iterations. */
   for (i = 0; i < 2; ++i)
-    y = y * 0.5 + f / y;
+    y = y * 0.5f + f / y;
 
   /* Calculate the final value. */
   if (odd)
     {
-      y *= __SQRT_HALF;
+      y *= (float)__SQRT_HALF;
       exp++;
     }
   exp >>= 1;

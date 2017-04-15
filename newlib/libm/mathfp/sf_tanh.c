@@ -40,10 +40,10 @@ _DEFUN (tanhf, (float),
 
   /* Check if the input is too big. */
   if (f > BIGX_F)
-    res = 1.0;
+    res = 1.0f;
 
   else if (f > LN3_OVER2)
-    res = 1.0 - 2.0 / (exp (2 * f) + 1.0);
+    res = 1.0f - 2.0f / (expf (2.0f * f) + 1.0f);
 
   /* Check if the input is too small. */
   else if (f < z_rooteps_f)
@@ -61,7 +61,7 @@ _DEFUN (tanhf, (float),
       res = f + f * R;
     }
 
-  if (x < 0.0)
+  if (x < 0.0f)
     res = -res;
 
   return (res);
