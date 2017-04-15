@@ -26,8 +26,10 @@
 
 static const float INV_LN2 = 1.442695040;
 static const float LN2 = 0.693147180;
-static const float p[] = { 0.249999999950, 0.00416028863 };
-static const float q[] = { 0.5, 0.04998717878 };
+static const float p0 = 0.249999999950;
+static const float p1 = 0.00416028863;
+static const float q0 = 0.5;
+static const float q1 = 0.04998717878;
 
 float
 _DEFUN (expf, (float),
@@ -52,7 +54,7 @@ _DEFUN (expf, (float),
     }
 
   /* Check for out of bounds. */
-  if (x > BIGX || x < SMALLX)
+  if (x > BIGX_F || x < SMALLX_F)
     {
       errno = ERANGE;
       return (x);
@@ -65,17 +67,17 @@ _DEFUN (expf, (float),
     }
 
   /* Calculate the exponent. */
-  if (x < 0.0)
-    N = (int) (x * INV_LN2 - 0.5);
+  if (x < (float)0.0)
+    N = (int) (x * INV_LN2 - (float)0.5);
   else
-    N = (int) (x * INV_LN2 + 0.5);
+    N = (int) (x * INV_LN2 + (float)0.5);
 
   /* Construct the mantissa. */
   g = x - N * LN2;
   z = g * g;
-  P = g * (p[1] * z + p[0]);
-  Q = q[1] * z + q[0];
-  R = 0.5 + P / (Q - P);
+  P = g * (p1 * z + p0);
+  Q = q1 * z + q0;
+  R = 0.5f + P / (Q - P);
 
   /* Return the floating point value. */
   N++;
