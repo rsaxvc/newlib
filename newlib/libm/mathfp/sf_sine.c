@@ -38,7 +38,7 @@ _DEFUN (sinef, (float, int),
 {
   int sgn, N;
   float y, XN, g, R, res;
-  float YMAX = 210828714.0;
+  float YMAX = 210828714.0f;
 
   switch (numtestf (x))
     {
@@ -78,10 +78,10 @@ _DEFUN (sinef, (float, int),
     }
 
   /* Calculate the exponent. */
-  if (y < 0.0)
-    N = (int) (y * ONE_OVER_PI - 0.5);
+  if (y < 0.0f)
+    N = (int) (y * (float)ONE_OVER_PI - 0.5f);
   else
-    N = (int) (y * ONE_OVER_PI + 0.5);
+    N = (int) (y * (float)ONE_OVER_PI + 0.5f);
   XN = (float) N;
 
   if (N & 1)
@@ -90,7 +90,7 @@ _DEFUN (sinef, (float, int),
   if (cosine)
     XN -= 0.5;
 
-  y = fabsf (x) - XN * __PI;
+  y = fabsf (x) - XN * (float)__PI;
 
   if (-z_rooteps_f < y && y < z_rooteps_f)
     res = y;

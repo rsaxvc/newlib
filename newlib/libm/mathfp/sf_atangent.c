@@ -69,14 +69,14 @@ _DEFUN (atangentf, (float, float, float, int),
           if (e > FLT_MAX_EXP)
             {
                branch = 1;
-               res = __PI_OVER_TWO;
+               res = (float)__PI_OVER_TWO;
             }
 
           /* Also check for underflow. */
           else if (e < FLT_MIN_EXP)
             {
                branch = 2;
-               res = 0.0;
+               res = 0.0f;
             }
          }
     }
@@ -96,10 +96,10 @@ _DEFUN (atangentf, (float, float, float, int),
       else
         N = 0;
 
-      if (f > (2.0 - ROOT3))
+      if (f > (2.0f - ROOT3))
         {
-          A = ROOT3 - 1.0;
-          f = (((A * f - 0.5) - 0.5) + f) / (ROOT3 + f);
+          A = ROOT3 - 1.0f;
+          f = (((A * f - 0.5f) - 0.5f) + f) / (ROOT3 + f);
           N++;
         }
 
@@ -126,12 +126,12 @@ _DEFUN (atangentf, (float, float, float, int),
 
   if (arctan2)
     {
-      if (u < 0.0)
-        res = __PI - res;
-      if (v < 0.0)
+      if (u < 0.0f)
+        res = (float)__PI - res;
+      if (v < 0.0f)
         res = -res;
     }
-  else if (x < 0.0)
+  else if (x < 0.0f)
     {
       res = -res;
     }

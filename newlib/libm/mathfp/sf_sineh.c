@@ -48,15 +48,15 @@ _DEFUN (sinehf, (float, int),
         return (x);
       case INF:
         errno = ERANGE;
-        return (ispos (x) ? z_infinity_f.f : -z_infinity_f.f);
+        return (isposf (x) ? z_infinity_f.f : -z_infinity_f.f);
     }
 
-  y = fabs (x);
+  y = fabsf (x);
 
-  if (!cosineh && x < 0.0)
+  if (!cosineh && x < 0.0f)
     sgn = -1;
 
-  if ((y > 1.0 && !cosineh) || cosineh)
+  if ((y > 1.0f && !cosineh) || cosineh)
     {
       if (y > BIGX_F)
         {
@@ -69,19 +69,19 @@ _DEFUN (sinehf, (float, int),
               return (x);
             }
 
-          z = exp (w);
+          z = expf (w);
 
           if (w > WBAR)
-            res = z * (V_OVER2_MINUS1 + 1.0);
+            res = z * (V_OVER2_MINUS1 + 1.0f);
         }
 
       else
         {
-          z = exp (y);
+          z = expf (y);
           if (cosineh)
-            res = (z + 1 / z) / 2.0;
+            res = (z + 1.0f / z) / 2.0f;
           else
-            res = (z - 1 / z) / 2.0;
+            res = (z - 1.0f / z) / 2.0f;
         }
 
       if (sgn < 0)
@@ -96,11 +96,11 @@ _DEFUN (sinehf, (float, int),
         }
       /* Calculate the Taylor series. */
       else
-        { 
+        {
           f = x * x;
           Q = f + q[0];
           P = p[1] * f + p[0];
-          R = f * (P / Q); 
+          R = f * (P / Q);
 
           res = x + x * R;
         }

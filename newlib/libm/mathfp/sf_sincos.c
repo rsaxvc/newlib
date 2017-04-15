@@ -23,8 +23,8 @@ _DEFUN (sincosf, (x, sinx, cosx),
         float *sinx _AND
         float *cosx)
 {
-  *sinx = sin (x);
-  *cosx = cos (x);
+  *sinx = sinf (x);
+  *cosx = cosf (x);
 }
 
 #ifdef _DOUBLE_IS_32BITS

@@ -52,19 +52,19 @@ _DEFUN (asinef, (float, int),
   y = fabsf (x);
   flag = acosine;
 
-  if (y > 0.5)
+  if (y > 0.5f)
     {
       i = 1 - flag;
 
       /* Check for range error. */
-      if (y > 1.0)
+      if (y > 1.0f)
         {
           errno = ERANGE;
           return (z_notanum_f.f);
         }
 
-      g = (1 - y) / 2.0;
-      y = -2 * sqrt (g);
+      g = (1.0f - y) / 2.0f;
+      y = -2.0f * sqrtf (g);
       branch = 1;
     }
   else
@@ -90,12 +90,12 @@ _DEFUN (asinef, (float, int),
   if (flag == 0)
     {
       res = (a[i] + res) + a[i];
-      if (x < 0.0)
+      if (x < 0.0f)
         res = -res;
     }
   else
     {
-      if (x < 0.0)
+      if (x < 0.0f)
         res = (b[i] + res) + b[i];
       else
         res = (a[i] - res) + a[i];

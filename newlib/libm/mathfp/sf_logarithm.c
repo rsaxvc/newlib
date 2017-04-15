@@ -62,8 +62,8 @@ _DEFUN (logarithmf, (float, int),
 
   z = f - 0.5f;
 
-  if (f > __SQRT_HALF)
-    z = (z - 0.5f) / (f * 0.5 + 0.5f);
+  if (f > (float)__SQRT_HALF)
+    z = (z - 0.5f) / (f * 0.5f + 0.5f);
   else
     {
       N--;
