@@ -32,7 +32,7 @@ _DEFUN (fabsf, (float),
       case 0:
         return (0.0);
       default:
-        return (x < 0.0 ? -x : x);
+        return (x < 0.0f ? -x : x);
     }
 }
 
