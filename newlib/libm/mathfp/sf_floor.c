@@ -23,15 +23,15 @@ _DEFUN (floorf, (float),
 {
   float f, y;
 
-  if (x > -1.0 && x < 1.0)
-    return (x >= 0 ? 0 : -1.0);
+  if (x > -1.0f && x < 1.0f)
+    return (x >= 0.0f ? 0.0f : -1.0f);
 
   y = modff (x, &f);
 
-  if (y == 0.0)
+  if (y == 0.0f)
     return (x);
 
-  return (x >= 0 ? f : f - 1.0);
+  return (x >= 0.0f ? f : f - 1.0f);
 }
 
 #ifdef _DOUBLE_IS_32BITS

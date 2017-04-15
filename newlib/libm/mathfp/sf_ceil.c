@@ -25,12 +25,12 @@ _DEFUN (ceilf, (float),
 
   y = modff (x, &f);
 
-  if (y == 0.0)
+  if (y == 0.0f)
     return (x);
-  else if (x > -1.0 && x < 1.0)
-    return (x > 0 ? 1.0 : 0.0);
+  else if (x > -1.0f && x < 1.0f)
+    return (x > 0.0f ? 1.0f : 0.0f);
   else
-    return (x > 0 ? f + 1.0 : f);
+    return (x > 0.0f ? f + 1.0f : f);
 }
 
 #ifdef _DOUBLE_IS_32BITS
