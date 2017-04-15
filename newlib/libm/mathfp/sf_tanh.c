@@ -38,9 +38,9 @@ _DEFUN (tanhf, (float),
 
   f = fabsf (x);
 
-  /* Check if the input is too big. */ 
-  if (f > BIGX)
-    res = 1.0; 
+  /* Check if the input is too big. */
+  if (f > BIGX_F)
+    res = 1.0;
 
   else if (f > LN3_OVER2)
     res = 1.0 - 2.0 / (exp (2 * f) + 1.0);
