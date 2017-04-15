@@ -3,10 +3,12 @@
 #include "zmath.h"
 #include "fdlibm.h"
 
-double BIGX = 7.09782712893383973096e+02;
-double SMALLX = -7.45133219101941108420e+02;
-double z_rooteps = 7.4505859692e-9;
-float  z_rooteps_f = 1.7263349182589107e-4;
+double BIGX        =  7.09782712893383973096e+02;
+double SMALL_X     = -7.45133219101941108420e+02;
+float  BIGXF       =  7.09782712893383973096e+02f;
+float  SMALLX_F    = -7.45133219101941108420e+02f;
+double z_rooteps   =  7.4505859692e-9;
+float  z_rooteps_f =  1.7263349182589107e-4;
 
 ufloat z_hugeval_f  = { 0x7f800000 };
 ufloat z_infinity_f = { 0x7f800000 };

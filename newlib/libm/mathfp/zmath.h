@@ -13,6 +13,8 @@
 
 extern double BIGX;
 extern double SMALLX;
+extern float  BIGX_F;
+extern float  SMALLX_F;
 
 typedef const union
 {
@@ -25,9 +27,6 @@ typedef const union
   long l;
   float f;
 } ufloat;
-
-extern double BIGX;
-extern double SMALLX;
 
 extern udouble z_infinity;
 extern udouble z_notanum;

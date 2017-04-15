@@ -6,7 +6,7 @@
 
 float powf (float x, float y)
 {
-  float d, k, t, r = 1.0;
+  float d, k, t, r = 1.0f;
   int n, sign, exponent_is_even_int = 0;
   __int32_t px;
 
@@ -14,7 +14,7 @@ float powf (float x, float y)
 
   k = modff (y, &d);
 
-  if (k == 0.0) 
+  if (k == 0.0f)
     {
       /* Exponent y is an integer. */
       if (modff (ldexpf (y, -1), &t))
@@ -34,17 +34,17 @@ float powf (float x, float y)
       if (y <= 0.0)
         errno = EDOM;
     }
-  else if ((t = y * log (fabsf (x))) >= BIGX) 
+  else if ((t = y * logf(fabsf (x))) >= BIGX_F)
     {
       errno = ERANGE;
       if (px & 0x80000000) 
         {
           /* x is negative. */
-          if (k) 
+          if (k)
             {
               /* y is not an integer. */
               errno = EDOM;
-              x = 0.0;
+              x = 0.0f;
             }
           else if (exponent_is_even_int)
             x = z_infinity_f.f;
@@ -56,14 +56,14 @@ float powf (float x, float y)
         x = z_infinity_f.f;
       }
     }
-  else if (t < SMALLX)
+  else if (t < SMALLX_F)
     {
       errno = ERANGE;
       x = 0.0;
     }
   else 
     {
-      if ( !k && fabsf (d) <= 32767 ) 
+      if ( !k && fabsf (d) <= 32767.0f )
         {
           n = (int) d;
 
@@ -79,7 +79,7 @@ float powf (float x, float y)
             }
 
           if (sign)
-            r = 1.0 / r;
+            r = 1.0f / r;
 
           return r;
         }
@@ -96,7 +96,7 @@ float powf (float x, float y)
                 }
             }
 
-          x = exp (t);
+          x = expf(t);
 
           if (!exponent_is_even_int) 
             { 
