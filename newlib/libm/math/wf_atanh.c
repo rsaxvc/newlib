@@ -41,7 +41,7 @@
 	    if(y>(float)1.0) {
                 /* atanhf(|x|>1) */
                 exc.type = DOMAIN;
-                exc.retval = 0.0/0.0;
+                exc.retval = NAN;
 	    } else {
                 /* atanhf(|x|=1) */
                 exc.type = SING;

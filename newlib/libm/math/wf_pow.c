@@ -107,7 +107,7 @@
 		    if (_LIB_VERSION == _SVID_) 
 		        exc.retval = 0.0;
 		    else 
-		        exc.retval = 0.0/0.0;	/* X/Open allow NaN */
+		        exc.retval = NAN;	/* X/Open allow NaN */
 		    if (_LIB_VERSION == _POSIX_) 
 		        errno = EDOM;
 		    else if (!matherr(&exc)) {

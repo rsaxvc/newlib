@@ -106,7 +106,7 @@ MATHREF
             exc.name = "acosh";
 	    exc.err = 0;
 	    exc.arg1 = exc.arg2 = x;
-            exc.retval = 0.0/0.0;
+            exc.retval = NAN;
             if (_LIB_VERSION == _POSIX_)
                errno = EDOM;
             else if (!matherr(&exc)) {

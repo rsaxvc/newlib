@@ -44,7 +44,7 @@
             if (_LIB_VERSION == _SVID_)
                exc.retval = x;
 	    else
-	       exc.retval = 0.0/0.0;
+	       exc.retval = NAN;
             if (_LIB_VERSION == _POSIX_)
                errno = EDOM;
             else if (!matherr(&exc)) {

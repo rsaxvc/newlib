@@ -106,7 +106,7 @@ QUICKREF
 	    if(y>1.0) {
                 /* atanh(|x|>1) */
                 exc.type = DOMAIN;
-                exc.retval = 0.0/0.0;
+                exc.retval = NAN;
 	    } else {
                 /* atanh(|x|=1) */
                 exc.type = SING;
